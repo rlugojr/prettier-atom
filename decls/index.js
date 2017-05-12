@@ -36,6 +36,8 @@ declare type Atom$Disposable = any;
 declare type Atom$View = any;
 declare type Atom$Workspace = any;
 declare type Atom$Command = { name: string, displayName: string };
+declare type Atom$Notifications$Options = { detail?: ?string | ?Error, dismissable?: ?boolean };
+declare type Atom$Tooltips$Options = { title?: string };
 declare var atom: {
   commands: {
     dispatch: (view: Atom$View, commandName: string) => void,
@@ -46,11 +48,12 @@ declare var atom: {
     set: (key: string) => any,
   },
   notifications: {
-    addError: (message: string, options?: { detail?: string, dismissable?: boolean }) => void,
-    addInfo: (message: string, options?: { detail?: string, dismissable?: boolean }) => void,
+    addError: (message: string, options?: Atom$Notifications$Options) => void,
+    addInfo: (message: string, options?: Atom$Notifications$Options) => void,
+    addWarning: (message: string, options?: Atom$Notifications$Options) => void,
   },
   tooltips: {
-    add: (target: HTMLElement, options?: { title?: string }) => Atom$Disposable
+    add: (target: HTMLElement, options?: Atom$Tooltips$Options) => Atom$Disposable,
   },
   views: {
     getView: Atom$Workspace => Atom$View,
